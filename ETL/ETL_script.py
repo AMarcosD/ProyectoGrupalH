@@ -18,7 +18,7 @@ geolocator = Nominatim(user_agent="MakroAnalyse")
 # In[2]:
 
 
-print('Introduzca la dirección donde se encuentren los conjuntos de datos: ')
+print('Introduzca la dirección donde se encuentran los archivos de datos: ')
 
 direccion = input()
 carpeta_datos = direccion + '\\'
