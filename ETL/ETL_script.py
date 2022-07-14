@@ -18,7 +18,7 @@ geolocator = Nominatim(user_agent="MakroAnalyse")
 # In[2]:
 
 
-print('Introduzca la dirección donde se encuentran los archivos de datos: ')
+print('Introduzca la dirección donde se encuentren los conjuntos de datos: ')
 
 direccion = input()
 carpeta_datos = direccion + '\\'
@@ -120,7 +120,6 @@ def etl_categoryproduct(ruta1):
 
 
 def etl_closed(ruta2):
-    print('normalizando')
     data_closed = pd.read_csv(ruta2)
     data_closed['won_date'] = pd.to_datetime(data_closed['won_date'])
     data_closed.drop(columns=['declared_monthly_revenue', 'sr_id', 'sdr_id', 'lead_behaviour_profile', \
@@ -283,16 +282,6 @@ def etl_product(ruta4):
 
 # In[227]:
 
-
-data_products = pd.read_csv(r'C:\Users\leand\Desktop\Data Science (Henry)\Proyectos\Proyecto_grupal\DS-Proyecto_Grupal_Olist\data\olist_products_dataset.csv')
-data_products.drop(columns=['product_name_lenght', 'product_description_lenght'], axis=1, inplace=True)
-## UTILIZAR FUNCION DE ETL_CATEGORYPRODUCT
-datamerge = merge1
-data_products.drop(columns=['product_photos_qty'], inplace=True)
-data_products['product_category_name'] = data_products['product_category_name'].fillna('sin_categoria')
-data_products = pd.merge(datamerge,data_products)
-data_products.drop(columns='product_category_name', inplace=True)
-data_products.drop(columns='idproduct_name', inplace= True)
 
 
 # In[171]:
