@@ -1,4 +1,4 @@
-Link para uso de proceso de automatización: https://www.youtube.com/watch?v=1BQbX2-VzH4
+Link para uso de proceso de automatización: https://www.youtube.com/watch?v=1BQbX2-VzH4 \
 Link Repositorio GitHub: https://github.com/AMarcosD/ProyectoGrupalH
 
 Normativas de normalización, transformación y limpieza de datos:
