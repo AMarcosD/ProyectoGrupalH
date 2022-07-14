@@ -10,7 +10,7 @@ https://docs.google.com/document/d/1uDTvTLVqh5SJ1CeoxzF897yXdmj_6a2R_17ugI-f4z4/
 Perfiles colaboradores del proyecto:\
   https://github.com/Leandrofranchina \
   https://github.com/jcruzalmiron \
-  https://github.com/mnperezluma \
+  https://github.com/mnperezluma 
 
 
 Link Prezi SEMANA 1: https://prezi.com/p/rykeh1_xensn/grupo-05/ \
