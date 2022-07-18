@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[180]:
+# In[1]:
 
 
 import pandas as pd
@@ -15,10 +15,10 @@ from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="MakroAnalyse")
 
 
-# In[160]:
+# In[2]:
 
 
-print('Introduzca la dirección donde se encuentren los conjuntos de datos')
+print('Introduzca la dirección donde se encuentren los conjuntos de datos: ')
 
 direccion = input()
 carpeta_datos = direccion + '\\'
@@ -31,23 +31,11 @@ for file in os.listdir(carpeta_datos):
 lista_datos = sorted(lista_datos)
 
 
-# In[211]:
-
-
-(lista_datos)
-
-
-# In[206]:
-
-
-(carpeta_datos + 'product_category_name_translation.csv')
-
-
-# In[213]:
+# In[281]:
 
 
 ruta1 = (carpeta_datos + 'product_category_name_translation.csv')
-ruta2 =(carpeta_datos + 'olist_closed_deals_dataset.csv')
+ruta2 = (carpeta_datos + 'olist_closed_deals_dataset.csv')
 ruta3 = (carpeta_datos + 'geolocation_dataset_brazil.csv')
 ruta4 = (carpeta_datos + 'olist_products_dataset.csv')
 ruta5 = (carpeta_datos + 'olist_order_payments_dataset.csv')
@@ -56,17 +44,17 @@ ruta7 = (carpeta_datos + 'olist_order_reviews_dataset.csv')
 ruta8 = (carpeta_datos + 'olist_order_items_dataset.csv')
 ruta9 = (carpeta_datos + 'olist_sellers_dataset.csv')
 ruta10 = (carpeta_datos + 'olist_customers_dataset.csv')
-rutaestados =(carpeta_datos + 'estados.json')
+rutaestados = (carpeta_datos + 'estados.json')
 
 
 # In[164]:
 
 
-print('Por favor, ingrese su usuario de MySQL')
+print('Por favor, ingrese su usuario de MySQL: ')
 user = input()
-print('Por favor, ingrese su contraseña de MySQL')
+print('Por favor, ingrese su contraseña de MySQL: ')
 password = input()
-print('Por favor, ingrese el host de MySQL')
+print('Por favor, ingrese el host de MySQL: ')
 host = input()
 database = 'db_olist'
 
@@ -248,7 +236,7 @@ def etl_geolocalizacion(ruta3, rutaestados):
         
 
 
-# In[170]:
+# In[230]:
 
 
 def etl_product(ruta4):
@@ -260,6 +248,7 @@ def etl_product(ruta4):
     data_products['product_category_name'] = data_products['product_category_name'].fillna('sin_categoria')
     data_products = pd.merge(datamerge,data_products)
     data_products.drop(columns='product_category_name', inplace=True)
+    data_products.drop(columns='idproduct_name', inplace= True)
 
     #Utilizamos la media para rellenar espacios nulos
     product_weight_median = data_products['product_weight_g'].median()
@@ -280,7 +269,7 @@ def etl_product(ruta4):
             cursor.execute("select database();")
             record = cursor.fetchone()
             cursor.execute('DROP TABLE IF EXISTS product;')
-            cursor.execute("CREATE TABLE product(product_category_name_english varchar(255),product_id varchar(255), product_weight_g FLOAT(10), product_length_cm FLOAT(10), product_height_cm FLOAT(10), product_width_cm FLOAT(10), PRIMARY KEY (product_id))")
+            cursor.execute("CREATE TABLE product (product_category_name_english varchar(255),product_id varchar(255), product_weight_g FLOAT(10), product_length_cm FLOAT(10), product_height_cm FLOAT(10), product_width_cm FLOAT(10), PRIMARY KEY (product_id))")
             for i,row in data_products.iterrows():
                 sql = "INSERT INTO product VALUES (%s,%s,%s,%s,%s,%s)"
                 cursor.execute(sql, tuple(row))
@@ -289,6 +278,10 @@ def etl_product(ruta4):
 
     except Error as e:
                 print("Error while connecting to MySQL", e)
+
+
+# In[227]:
+
 
 
 # In[171]:
@@ -560,11 +553,10 @@ def etl_customer(ruta10):
 funciones = [etl_categoryproduct, etl_closed, etl_geolocalizacion, etl_product, etl_payment, etl_order, etl_review, etl_items, etl_seller, etl_customer]
 rutas = [ruta1, ruta2, ruta3, ruta4, ruta5, ruta6, ruta7, ruta8, ruta9, ruta10]
 j = 0
-name = 0
+p = 0
 
-i = 8
 for i in funciones:
-   print('Normalizando la tabla', funciones[name], 'y cargando en base de datos...')
+   print('Normalizando el archivo', rutas[j].split(carpeta_datos)[1], 'y cargando en base de datos...')
    
    if i == etl_geolocalizacion:
       merge_geo = i(rutas[j], rutaestados)
@@ -574,7 +566,7 @@ for i in funciones:
       i(rutas[j])
 
    j = j + 1
-   name = name + 1
+   p = p + 1
    
 print('El proceso ETL ha finalizado exitosamente')
 
@@ -632,4 +624,3 @@ try:
 
 except Error as e:
             print("Error while connecting to MySQL", e)
-
