@@ -16,5 +16,7 @@ Perfiles colaboradores del proyecto:\
   https://github.com/mnperezluma 
 
 
-Link Prezi SEMANA 1: https://prezi.com/p/rykeh1_xensn/grupo-05/ \
-Link Prezi SEMANA 2: 
+Link Prezi SEMANA 1: https://prezi.com/view/1rK7luCvqmjZNF7eKAsC/ \
+Link Prezi SEMANA 2: https://prezi.com/view/JlN7Bs0Wuft95xpKQjds/ \
+Link Prezi SEMANA 3: https://prezi.com/view/F6I0FfGv2NvkAtHMrCnd/ \
+Link Prezi SEMANA 4: https://prezi.com/view/AuPGsxwcq7g8yt5OBnef/ \
